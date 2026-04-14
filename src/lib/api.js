@@ -1,6 +1,10 @@
 import { error } from '@sveltejs/kit';
 
-const base = 'https://api.realworld.show/api';
+// Patched for conceptkit-demo: API base URL is now configurable via
+// VITE_API_URL so this SPA can be pointed at a local ConceptKit
+// backend without rebuilding. Upstream default preserved as the
+// fallback. See conceptkit-demo/README.md.
+const base = import.meta.env.VITE_API_URL || 'https://api.realworld.show/api';
 
 async function send({ method, path, data, token }) {
 	const opts = { method, headers: {} };
